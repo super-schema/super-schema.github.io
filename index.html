@@ -11,6 +11,7 @@
   <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/workflow.css?v=1">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Super Schema">
   <meta property="og:title" content="Super Schema — One model. Many schemas.">
@@ -20,6 +21,7 @@
   <meta property="og:image:alt" content="The Super Schema branching schema mark">
   <meta name="twitter:card" content="summary">
   <script type="module" src="/assets/site.mjs"></script>
+  <script type="module" src="/assets/workflow.mjs?v=1"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -92,13 +94,79 @@
   </section>
   <section class="workflow-section section-pad" id="workflow" aria-labelledby="workflow-title">
     <div class="shell">
-      <div class="section-heading"><p class="eyebrow">From definition to delivery</p><h2 id="workflow-title">Fewer places to define<br>the same thing.</h2><p>Keep the logical model at the center. Make each representation a deliberate next step.</p></div>
-      <ol class="workflow-steps">
-        <li><span class="step-number">01</span><h3>Model the meaning</h3><p>Create an entity visually, paste a schema, or import a definition. Capture fields and their intent.</p></li>
-        <li><span class="step-number">02</span><h3>Connect definitions</h3><p>Reuse types and reference related entities. Give APIs and events a shared language.</p></li>
-        <li><span class="step-number">03</span><h3>Generate and inspect</h3><p>Choose a target. Review its representation, type mappings, and validation messages.</p></li>
-        <li><span class="step-number">04</span><h3>Publish deliberately</h3><p>Keep draft work separate. Publish a version and pin the definitions that depend on it.</p></li>
+      <div class="section-heading"><p class="eyebrow">From definition to delivery</p><h2 id="workflow-title">Fewer places to define<br>the same thing.</h2><p>Follow a Customer definition from shared meaning to a published version. Choose a step, then explore the decisions inside it.</p></div>
+      <ol class="workflow-steps" aria-label="Customer modeling workflow">
+        <li><a class="wf-step-link" id="workflow-tab-model" aria-label="Step 1: Model the meaning" href="#workflow-model" data-workflow-step="model"><span class="step-number">01</span><span class="wf-step-name">Model the meaning</span><span class="wf-step-summary">Agree on fields, descriptions, types, and ownership.</span></a></li>
+        <li><a class="wf-step-link" id="workflow-tab-connect" aria-label="Step 2: Connect definitions" href="#workflow-connect" data-workflow-step="connect"><span class="step-number">02</span><span class="wf-step-name">Connect definitions</span><span class="wf-step-summary">Reference the same entity from related contracts.</span></a></li>
+        <li><a class="wf-step-link" id="workflow-tab-generate" aria-label="Step 3: Generate and inspect" href="#workflow-generate" data-workflow-step="generate"><span class="step-number">03</span><span class="wf-step-name">Generate and inspect</span><span class="wf-step-summary">Review physical types, optionality, and format limits.</span></a></li>
+        <li><a class="wf-step-link" id="workflow-tab-publish" aria-label="Step 4: Publish deliberately" href="#workflow-publish" data-workflow-step="publish"><span class="step-number">04</span><span class="wf-step-name">Publish deliberately</span><span class="wf-step-summary">Capture a version and choose what consumers reference.</span></a></li>
       </ol>
+      <noscript><p class="wf-caption">All four steps are shown below. Interactive field, target, and version controls require JavaScript.</p></noscript>
+      <div class="wf-explorer">
+        <section class="wf-demo" id="workflow-model" aria-labelledby="wf-model-title">
+          <div class="wf-panel-heading"><div><p class="eyebrow">01 / Model the meaning</p><h3 id="wf-model-title">Start with a definition people can agree on.</h3></div><span class="wf-example-label">Interactive illustration</span></div>
+          <div class="wf-contributors" aria-label="Contributions to a shared definition"><div><strong>Product &amp; business</strong><span>Meaning and intended use</span></div><div><strong>Governance</strong><span>Standards and classification</span></div><div><strong>Administration</strong><span>Ownership and participation</span></div><div><strong>Engineering</strong><span>Types and implementation context</span></div></div>
+          <div class="wf-direction"><span aria-hidden="true">↓</span> Shared decisions become a logical definition</div>
+          <div class="wf-two-column">
+            <div class="wf-entity-card"><div class="wf-card-header"><span>Logical entity</span><strong>Customer</strong></div><p class="wf-card-hint">Select a field to inspect its intent.</p><table class="wf-field-table"><thead><tr><th scope="col">Field</th><th scope="col">Logical type</th><th scope="col">Presence</th></tr></thead><tbody><tr><th scope="row"><button type="button" data-wf-field="id" aria-pressed="false">id</button></th><td><code>string</code></td><td>Required</td></tr><tr><th scope="row"><button type="button" data-wf-field="name" aria-pressed="false">name</button></th><td><code>string</code></td><td>Required</td></tr><tr><th scope="row"><button type="button" data-wf-field="email" aria-pressed="true">email</button></th><td><code>string</code></td><td>Optional</td></tr></tbody></table><div class="wf-entity-footer"><span>One shared definition</span><span>Three explicit fields</span></div></div>
+            <div class="wf-field-inspector" aria-live="polite"><p class="wf-kicker">Field intent</p><h4 id="wf-field-name">Customer.email</h4><p id="wf-field-description">Email address used for customer communications.</p><dl class="wf-properties"><div><dt>Logical type</dt><dd id="wf-field-type">string · optional</dd></div><div><dt>Classification</dt><dd id="wf-field-classification">PII</dd></div><div><dt>Definition owner</dt><dd>Customer product team · example</dd></div></dl><p class="wf-inspector-note">Classification records governance intent. Configure the corresponding controls in downstream systems.</p></div>
+          </div>
+          <div class="wf-source"><div class="wf-source-heading"><span>Logical source · illustrative TypeSpec</span><span>Descriptions live beside fields</span></div><pre><code>model Customer {
+  @doc("Stable customer identifier.")
+  id: string;
+  @doc("Customer display name.")
+  name: string;
+  @doc("Email address used for customer communications.")
+  email?: string;
+}</code></pre></div>
+          <p class="wf-caption">Start visually, paste a definition, or import a supported schema. Make the meaning and logical shape clear before reviewing any physical format.</p>
+        </section>
+
+        <section class="wf-demo" id="workflow-connect" aria-labelledby="wf-connect-title">
+          <div class="wf-panel-heading"><div><p class="eyebrow">02 / Connect definitions</p><h3 id="wf-connect-title">Give related contracts a shared vocabulary.</h3></div><span class="wf-example-label">Conceptual reference map</span></div>
+          <p class="wf-intro">An order can reference a Customer. An API can return one. An event can use one as its payload. Select a reference to see how the shared entity is used.</p>
+          <div class="wf-reference-map" aria-label="Customer is referenced by an order, an API response, and an event payload">
+            <div class="wf-shared-entity"><p class="wf-kicker">Shared logical entity</p><h4>Customer</h4><ul><li><code>id: string</code></li><li><code>name: string</code></li><li><code>email?: string</code></li></ul><span>Meaning, descriptions, and type intent</span></div>
+            <div class="wf-reference-lines"><span>Referenced by</span><svg viewBox="0 0 80 250" preserveAspectRatio="none" width="80" height="250" fill="none" aria-hidden="true"><path d="M0 125h30M30 36v178" stroke="currentColor"/><path data-wf-edge="order" d="M30 36h50"/><path data-wf-edge="api" class="is-active" d="M30 125h50"/><path data-wf-edge="event" d="M30 214h50"/></svg></div>
+            <div class="wf-consumers" aria-label="Inspect a Customer reference"><button type="button" data-wf-reference="order" aria-pressed="false"><span class="wf-kicker">Entity relationship</span><strong>Order.customer</strong><span>A reference to Customer</span></button><button type="button" data-wf-reference="api" aria-pressed="true"><span class="wf-kicker">API contract</span><strong>Get customer</strong><span>A response shaped by Customer</span></button><button type="button" data-wf-reference="event" aria-pressed="false"><span class="wf-kicker">Event contract</span><strong>customer.updated</strong><span>A Customer-backed message payload</span></button></div>
+          </div>
+          <div class="wf-reference-detail"><div aria-live="polite"><p class="wf-kicker">Reference in focus</p><h4 id="wf-reference-title">An API response uses the Customer definition.</h4><p id="wf-reference-description">The response points to a Customer schema component. Its fields describe the same logical customer, rather than an independently defined shape.</p></div><div class="wf-source"><div class="wf-source-heading"><span id="wf-reference-language">OpenAPI excerpt · illustrative</span></div><pre><code id="wf-reference-code">responses:
+  "200":
+    description: Customer found
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/Customer"</code></pre></div></div>
+          <p class="wf-caption">Reuse custom scalars, enums, and unions as well as entities. This diagram illustrates declared references; it does not discover runtime data flow or synchronize running systems.</p>
+        </section>
+
+        <section class="wf-demo" id="workflow-generate" aria-labelledby="wf-generate-title">
+          <div class="wf-panel-heading"><div><p class="eyebrow">03 / Generate and inspect</p><h3 id="wf-generate-title">Make every physical representation a deliberate choice.</h3></div><span class="wf-example-label">Illustrative output</span></div>
+          <div class="wf-target-toolbar"><p>The logical entity stays recognizable. The target format determines how types and optionality are expressed.</p><label for="wf-target">Review a target<select id="wf-target"><option value="json">JSON Schema</option><option value="avro">Avro</option><option value="sql">PostgreSQL</option></select></label></div>
+          <div class="wf-generation-grid"><div class="wf-mapping-card"><div class="wf-card-header"><span>Logical → physical</span><strong id="wf-target-name">JSON Schema</strong></div><table class="wf-field-table"><thead><tr><th scope="col">Field</th><th scope="col">Logical intent</th><th scope="col">Target type</th></tr></thead><tbody><tr><th scope="row"><code>id</code></th><td>string · required</td><td data-wf-mapped="id">string · required</td></tr><tr><th scope="row"><code>name</code></th><td>string · required</td><td data-wf-mapped="name">string · required</td></tr><tr><th scope="row"><code>email</code></th><td>string · optional</td><td data-wf-mapped="email">string · may be omitted</td></tr></tbody></table><div class="wf-target-review" aria-live="polite"><p class="wf-kicker">What to inspect</p><p id="wf-target-review">JSON Schema properties are optional unless named in required. Here, id and name are required; email may be omitted.</p></div></div><div class="wf-source wf-output-source"><div class="wf-source-heading"><span id="wf-output-filename">customer.schema.json</span><button class="copy-button" type="button" data-copy="wf-output-code">Copy</button></div><pre><code id="wf-output-code">{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Customer",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "email": { "type": "string" }
+  },
+  "required": ["id", "name"]
+}</code></pre></div></div>
+          <div class="wf-review-points"><div><strong>Meaning</strong><span>Review the output beside the shared field descriptions.</span></div><div><strong>Types</strong><span>Review precision, scale, nullability, and target limits.</span></div><div><strong>Diagnostics</strong><span>Inspect the actual emitter output and validation messages.</span></div></div>
+          <p class="wf-caption">These are static examples, not a browser-based compiler. Generate and validate real artifacts in the application. Format support differs; review each output before adopting it.</p>
+        </section>
+
+        <section class="wf-demo" id="workflow-publish" aria-labelledby="wf-publish-title">
+          <div class="wf-panel-heading"><div><p class="eyebrow">04 / Publish deliberately</p><h3 id="wf-publish-title">Make evolution explicit. Keep references intentional.</h3></div><span class="wf-example-label">Local publishing illustration</span></div>
+          <p class="wf-intro">A draft adds an optional phone field. Publish the example, then choose which published Customer version a sample event references.</p>
+          <div class="wf-version-flow"><div class="wf-version-card"><span class="wf-version-state">Published snapshot</span><h4>Customer <code>v1.0</code></h4><ul class="wf-version-fields"><li>id <span>string</span></li><li>name <span>string</span></li><li>email? <span>string</span></li></ul><p>This definition stays fixed.</p></div><span class="wf-version-arrow" aria-hidden="true">→</span><div class="wf-version-card wf-candidate"><span class="wf-version-state" id="wf-candidate-state">Draft change</span><h4>Customer <code>v1.1</code></h4><ul class="wf-version-fields"><li>id <span>string</span></li><li>name <span>string</span></li><li>email? <span>string</span></li><li class="wf-added-field">+ phone? <span>string</span></li></ul><p id="wf-candidate-note">Review the added field before publishing.</p></div></div>
+          <div class="wf-publish-controls"><button class="button button-primary" type="button" id="wf-publish-example">Publish example v1.1</button><button class="text-link wf-reset" type="button" id="wf-reset-example">Reset example</button><p id="wf-publish-status" role="status" aria-live="polite">The example starts with v1.0 published and v1.1 in draft.</p></div>
+          <div class="wf-pin-card"><div><p class="wf-kicker">Consumer reference</p><h4>customer.updated payload</h4><p>A version pin keeps this example tied to a chosen published definition.</p><label for="wf-pinned-version">Pin Customer to<select id="wf-pinned-version"><option value="1.0">Published v1.0</option><option value="1.1" disabled>v1.1 · publish the example first</option></select></label></div><div class="wf-pinned-output" aria-live="polite"><span id="wf-pin-label">Customer@1.0</span><ul id="wf-pinned-fields"><li>id: string</li><li>name: string</li><li>email?: string</li></ul><p id="wf-pin-note">This consumer uses the three-field v1.0 definition.</p></div></div>
+          <p class="wf-caption">This illustration changes only the example on this page. Real publishing requires the application, review of change impact and target diagnostics, and a deliberate choice of referenced versions.</p>
+        </section>
+      </div>
     </div>
   </section>
   <section class="product-section section-pad" aria-labelledby="product-title">

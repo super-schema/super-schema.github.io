@@ -16,6 +16,14 @@ Open `http://127.0.0.1:4173`. The homepage, guide, and recovery page use semanti
 HTML, shared CSS, and a small ES module for example tabs and clipboard controls.
 The schema examples are illustrative static text; generation runs in the application.
 
+The `#workflow` section progressively enhances four readable diagrams into
+keyboard-accessible step tabs. It includes field intent inspection, declared
+Customer references, target-specific output reviews, and a local version/pin
+illustration. The target previews reuse `assets/examples.mjs`; workflow data and
+version rules live in `assets/workflow-data.mjs`. No project data is changed.
+Keep references distinct from observed runtime lineage, and keep publishing
+examples distinct from actual application actions.
+
 ## Publish
 
 GitHub Pages serves `main` at `/ (root)` with `.nojekyll`. Push reviewed changes
