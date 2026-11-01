@@ -16,7 +16,10 @@ to selectable schema examples. It is an illustration, not a hosted compiler.
 
 Headline: **One model. Many schemas.**
 
-Use the approved Schema Fold mark and all eight feature glyphs. Pair Space
+Use the approved Canonical Hub branching mark and all eight feature glyphs.
+The owner selected Canonical Hub on 2026-10-31, replacing the initial Schema Fold
+mark. Retain the exact supplied artwork for social previews and use the compact
+SVG for website logos and the favicon. Pair Space
 Grotesk headings with Inter body text and system monospace for code. Self-host
 the two Latin variable fonts and their OFL licenses.
 

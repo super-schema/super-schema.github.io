@@ -24,9 +24,11 @@ All site paths assume the organization root URL above.
 
 ## Assets and provenance
 
-- `assets/mark.svg` is the application's approved vector mark. The eight inline
+- `assets/mark.svg` is the compact Canonical Hub primary logo, matching the
+  application's `src/app/icon.svg`. The eight inline
   feature glyphs in `index.html` match its feature icon family.
-- `assets/social.png` is the approved Schema Fold product concept.
+- `assets/social.png` is the owner's uploaded Canonical Hub artwork, retained
+  unchanged for social previews.
 - `assets/workbench.png` is the application's entity-editor visual test fixture,
   using synthetic data. The page crops the fixture's masked application header.
 - The mark and product image were copied from the
