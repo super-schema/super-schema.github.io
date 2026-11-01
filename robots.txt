@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://super-schema.github.io/sitemap.xml

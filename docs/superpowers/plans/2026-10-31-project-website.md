@@ -1,6 +1,6 @@
 # Super Schema Website Implementation Plan
 
-> Steps use checkbox (`- [ ]`) syntax so an executor can track progress task by task.
+> Steps use checkbox (`- [x]`) syntax so an executor can track progress task by task.
 
 **Goal:** Publish an accurate, useful Super Schema product website on GitHub Pages.
 
@@ -32,20 +32,20 @@ and static example data. GitHub Pages serves the main branch at repository root.
 The guide lives at `/get-started.html`. Source links use
 `https://github.com/super-schema/super-schema`.
 
-- [ ] Create the semantic page structure with this exact hero copy:
+- [x] Create the semantic page structure with this hero copy:
 
 ```html
 <h1>One model.<br><span>Many schemas.</span></h1>
 <p>Design the logical shape of your data. Reuse it across schemas, APIs, and events.</p>
 <a href="/get-started.html">Get started</a>
-<a href="https://github.com/super-schema/super-schema">View on GitHub</a>
+<a href="/#example">Explore an example</a>
 ```
 
-- [ ] Implement the light violet/ink design, the model-to-output example frame,
+- [x] Implement the light violet/ink design, the model-to-output example frame,
   four-stage workflow, eight feature rows, and dark product-screenshot section.
-- [ ] Add the practical guide and recovery page. Copy only the selected brand
+- [x] Add the practical guide and recovery page. Copy only the selected brand
   assets and synthetic workbench screenshot from the application repository.
-- [ ] Self-host the two font files with their original license texts. Add
+- [x] Self-host the two font files with their original license texts. Add
   canonical/Open Graph metadata, robots, sitemap, and `.nojekyll`.
 
 ### Task 2: Implement the example interactions and checks
@@ -58,22 +58,22 @@ Each value supplies `label`, `filename`, `status`, and `code`. The DOM provides
 `[role="tab"][data-format]`, `#example-code`, `#example-filename`, and
 `#example-panel`. Copy controls name their code element with `data-copy`.
 
-- [ ] Define the Customer example with required `id` and `name`, optional
+- [x] Define the Customer example with required `id` and `name`, optional
   `email`, and matching JSON Schema, Avro, Protobuf, and PostgreSQL examples.
-- [ ] Switch only among known example keys; update code with textContent and
+- [x] Switch only among known example keys; update code with textContent and
   keep aria-selected, tabindex, and the panel label synchronized. Support
   ArrowLeft, ArrowRight, Home, and End.
-- [ ] Copy only the referenced code text; announce success after the clipboard
+- [x] Copy only the referenced code text; announce success after the clipboard
   promise resolves and offer text selection if clipboard access fails.
-- [ ] Use the platform test runner:
+- [x] Use the platform test runner:
 
 ```json
 {"scripts":{"test":"node --test tests/*.test.mjs","dev":"python3 -m http.server 4173 --bind 127.0.0.1"}}
 ```
 
-- [ ] Run `npm test`. Check field optionality across examples, internal assets
+- [x] Run `npm test`. Check field optionality across examples, internal assets
   and anchors, required metadata, and the existence of `.nojekyll`.
-- [ ] Preview with `npm run dev`; review the actual browser UI, tabs, keyboard
+- [x] Preview with `npm run dev`; review the actual browser UI, tabs, keyboard
   navigation, copy control, guide links, mobile layout, and reduced motion.
 
 ### Task 3: Publish and verify
