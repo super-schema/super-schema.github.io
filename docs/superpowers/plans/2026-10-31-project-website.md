@@ -83,8 +83,22 @@ Each value supplies `label`, `filename`, `status`, and `code`. The DOM provides
 **Interfaces:** GitHub Pages publishes `main:/`; the canonical origin is
 `https://super-schema.github.io`.
 
-- [ ] Commit the implementation, rebase onto main, and fast-forward main.
-- [ ] Run `npm test` on main, push main, and enable Pages branch publishing.
-- [ ] Verify deployment status, the live homepage and guide, and core assets.
-- [ ] Set the repository website URL to the verified deployed address.
-- [ ] Remove the clean merged worktree and implementation branch.
+- [x] Commit the implementation, rebase onto main, and fast-forward main.
+- [x] Run `npm test` on main, push main, and enable Pages branch publishing.
+- [x] Verify deployment status, the live homepage and guide, and core assets.
+- [x] Set the repository website URL to the verified deployed address.
+- [x] Remove the clean merged worktree and implementation branch.
+
+## Verification
+
+- Five Node test groups passed in the worktree and again on main.
+- Browser review covered 1440px desktop, 390px mobile, and 320px narrow mobile;
+  both the homepage and guide fit without horizontal page overflow.
+- The four example tabs, arrow/Home/End keyboard controls, panel labels,
+  clipboard content, guide navigation, and recovery page were checked.
+- GitHub Pages deployment [41265853455](https://github.com/super-schema/super-schema.github.io/actions/runs/41265853455)
+  succeeded for the initial website release. The live homepage, guide, CSS,
+  ES modules, fonts, image, robots, and sitemap returned HTTP 200 with the
+  expected content types. An unknown path returned HTTP 404.
+- Live browser checks found no console warnings or errors.
+- Safari, Firefox, and a full assistive-technology audit were not run.
