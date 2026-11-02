@@ -1,16 +1,19 @@
-import { EXAMPLES } from "./examples.mjs";
+import { EXAMPLES } from "./examples.mjs?v=2";
 
 const panel = document.getElementById("example-panel");
 if (panel) {
   const tabs = [...document.querySelectorAll('[role="tab"][data-format]')];
   const code = document.getElementById("example-code");
   const filename = document.getElementById("example-filename");
+  const targets = [...document.querySelectorAll("[data-target]")];
+  const note = document.getElementById("example-detail");
 
   function selectFormat(key) {
     if (!Object.hasOwn(EXAMPLES, key)) return;
     const example = EXAMPLES[key];
     code.textContent = example.code;
     filename.textContent = example.filename;
+    note.textContent = example.note ?? "Review the generated artifact, field types, and optionality before adopting an output.";
     code.parentElement.scrollTop = 0;
     code.parentElement.scrollLeft = 0;
     panel.setAttribute("aria-labelledby", "format-" + key);
@@ -19,11 +22,9 @@ if (panel) {
       tab.setAttribute("aria-selected", String(selected));
       tab.tabIndex = selected ? 0 : -1;
     }
-    for (const target of document.querySelectorAll("[data-target]")) {
+    for (const target of targets) {
       target.classList.toggle("is-active", target.dataset.target === key);
-    }
-    for (const branch of document.querySelectorAll("[data-branch]")) {
-      branch.classList.toggle("is-active", branch.dataset.branch === key);
+      target.setAttribute("aria-pressed", String(target.dataset.target === key));
     }
   }
 
@@ -40,6 +41,15 @@ if (panel) {
       selectFormat(tabs[next].dataset.format);
       tabs[next].focus();
     });
+  });
+  for (const target of targets) {
+    target.addEventListener("click", () => selectFormat(target.dataset.target));
+  }
+  document.querySelector("[data-explore-example]").addEventListener("click", (event) => {
+    event.preventDefault();
+    history.replaceState(null, "", "#example-panel");
+    panel.focus({ preventScroll: true });
+    panel.scrollIntoView({ block: "start" });
   });
   selectFormat("json");
 }

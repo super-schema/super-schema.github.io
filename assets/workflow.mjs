@@ -1,4 +1,4 @@
-import { EXAMPLES } from "./examples.mjs";
+import { EXAMPLES } from "./examples.mjs?v=2";
 import { FIELD_INTENT, REFERENCES, TARGET_REVIEW, pinnedFields } from "./workflow-data.mjs";
 
 const root = document.getElementById("workflow");

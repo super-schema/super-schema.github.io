@@ -16,6 +16,16 @@ Open `http://127.0.0.1:4173`. The homepage, guide, and recovery page use semanti
 HTML, shared CSS, and a small ES module for example tabs and clipboard controls.
 The schema examples are illustrative static text; generation runs in the application.
 
+The hero offers eight schema previews. The model's format buttons, the target list,
+and the keyboard-accessible tabs share the same selected output. “Explore an
+example” focuses and scrolls to that output panel. Keep required fields and
+optional email consistent, and retain each format's limitations in its note.
+
+Reading text uses a system serif stack alongside Inter interface controls.
+Body copy is 19px, controls are generally 16px, and code is at least 14px.
+Anthropic's proprietary fonts are not bundled. Check phone layouts when changing
+the type scale; labels should wrap instead of shrinking to fit.
+
 The `#workflow` section progressively enhances four readable diagrams into
 keyboard-accessible step tabs. It includes field intent inspection, declared
 Customer references, target-specific output reviews, and a local version/pin
@@ -37,6 +47,10 @@ All site paths assume the organization root URL above.
   feature glyphs in `index.html` match its feature icon family.
 - `assets/social.png` is the owner's uploaded Canonical Hub artwork, retained
   unchanged for social previews.
+- `assets/github-mark.svg` is the existing vector mark with its dark tile removed;
+  `assets/github-mark.png` is its transparent 512×512 GitHub-avatar export (12,178
+  bytes, under GitHub's 1 MB limit). The original mark and uploaded artwork remain
+  intact.
 - `assets/workbench.png` is the application's entity-editor visual test fixture,
   using synthetic data. The page crops the fixture's masked application header.
 - The mark and product image were copied from the

@@ -25,6 +25,20 @@ test("Customer examples preserve the shared fields and email optionality", () =>
   assert.match(EXAMPLES.sql.code, /id TEXT NOT NULL/);
   assert.match(EXAMPLES.sql.code, /name TEXT NOT NULL/);
   assert.match(EXAMPLES.sql.code, /email TEXT\n/);
+  const openapi = JSON.parse(EXAMPLES.openapi.code);
+  assert.equal(openapi.openapi, "3.0.3");
+  assert.deepEqual(openapi.components.schemas.Customer.properties, json.properties);
+  assert.deepEqual(openapi.components.schemas.Customer.required, json.required);
+  for (const key of ["bigquery", "spanner"]) {
+    assert.match(EXAMPLES[key].code, /id STRING(?:\(MAX\))? NOT NULL/);
+    assert.match(EXAMPLES[key].code, /name STRING(?:\(MAX\))? NOT NULL/);
+    assert.match(EXAMPLES[key].code, /email STRING(?:\(MAX\))?\n/);
+  }
+  assert.match(EXAMPLES.spanner.code, /PRIMARY KEY \(id\)/);
+  assert.equal(EXAMPLES.java.status, "Preview");
+  assert.match(EXAMPLES.java.code, /@JsonProperty\(value = "id", required = true\)/);
+  assert.match(EXAMPLES.java.code, /@JsonProperty\("email"\)/);
+  assert.match(EXAMPLES.java.note, /do not enforce runtime validation/);
 });
 
 test("the initial example works without JavaScript and copy targets exist", async () => {
@@ -86,4 +100,14 @@ test("self-hosted fonts retain their format and licenses", async () => {
     assert.equal(bytes.subarray(0, 4).toString(), "wOF2");
     assert.match(await read(`assets/fonts/${license}`), /SIL OPEN FONT LICENSE/);
   }
+});
+
+test("GitHub avatar stays a compact PNG with an alpha channel", async () => {
+  const png = await readFile(new URL("assets/github-mark.png", root));
+  assert.ok(png.length < 1_000_000);
+  assert.equal(png.subarray(1, 4).toString(), "PNG");
+  assert.equal(png.readUInt32BE(16), 512);
+  assert.equal(png.readUInt32BE(20), 512);
+  assert.equal(png[25], 6); // RGBA PNG; preserve transparency when re-exporting.
+  assert.doesNotMatch(await read("assets/github-mark.svg"), /hub-tile/);
 });
